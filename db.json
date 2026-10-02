@@ -1,13 +1,6 @@
 {
   "pitches": [
     {
-      "id": "2",
-      "name": "Sân bóng số 02",
-      "price": 250000,
-      "location": "Thanh Xuân",
-      "type": "Sân 7"
-    },
-    {
       "id": "3",
       "name": "Sân bóng số 03",
       "price": 180000,

@@ -10,10 +10,11 @@ interface Pitch {
 function ListPage() {
   const [pitches, setPitches] = useState<Pitch[]>([]);
   const [search, setSearch] = useState("");
+  const [searchDebounce, setSearchDebounce] = useState("");
 
 
   function getPitches() {
-   axios.get("http://localhost:3000/pitches?name_like=" + search).then((res) => {setPitches(res.data);
+   axios.get("http://localhost:3000/pitches?name_like=" + searchDebounce).then((res) => {setPitches(res.data);
    });
   }
 
@@ -24,9 +25,16 @@ function ListPage() {
       }) ;
     }
   }
-  useEffect(() => {
-    getPitches();
+ useEffect(() => {
+  const timer = setTimeout(() => {
+    setSearchDebounce(search);
+  }, 500);
+
+  return () => {
+    clearTimeout(timer);
+  };
   }, [search]);
+  useEffect(() => { getPitches(); }, [searchDebounce]); 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Danh sách sân bóng</h1>
